@@ -29,6 +29,7 @@ gate-screener/
 - 单页筛选界面，首屏直接展示基础筛选、均线筛选、涨跌幅筛选、形态筛选、结果区
 - 顶部条件摘要标签、策略保存、策略加载、策略删除
 - Gate USDT 永续市场 contracts/tickers/candles 接入
+- `gateio-api` 已切换为仓库内 vendored 本地源码依赖，路径为 `vendors/gateio-api`
 - 扫描引擎: 初筛、K 线并发拉取、均线/涨跌幅/形态判断、排序与裁剪
 - 结果表格 + ECharts K 线详情图 + MA 叠加 + 命中标记
 - 本地 JSON 策略存储
@@ -176,6 +177,8 @@ pnpm --filter @gate-screener/api test
 - Gate 公共数据接口结果使用 15 秒短缓存
 - 默认并发数 10，可在 `apps/api/src/utils/constants.ts` 中调整
 - 形态识别采用工程可用近似版，函数已独立拆分，便于后续精修
+- `gateio-api` 不再依赖远端 npm 版本，`apps/api` 当前使用仓库内的 `vendors/gateio-api`
+- 如果修改了 `vendors/gateio-api/src`，执行 `pnpm vendor:build:gateio-api`，然后重新执行一次 `pnpm install`
 
 ## 已知取舍
 

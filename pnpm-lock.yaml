@@ -48,8 +48,8 @@ importers:
         specifier: ^5.6.1
         version: 5.8.4
       gateio-api:
-        specifier: ^1.5.0
-        version: 1.5.0
+        specifier: file:../../vendors/gateio-api
+        version: file:vendors/gateio-api
       lru-cache:
         specifier: ^11.2.2
         version: 11.2.7
@@ -1405,8 +1405,8 @@ packages:
   function-bind@1.1.2:
     resolution: {integrity: sha512-7XHNxH7qX9xG5mIwxkhumTox/MIRNcOgDrxWsMt2pAr23WHp6MrRlN7FBSFpCpr+oVO0F744iUgR82nJMfG2SA==}
 
-  gateio-api@1.5.0:
-    resolution: {integrity: sha512-OAD5vF6nqSch7+q+D0XXb4YW5ZOUZz4NanyL6jEimofep3rT6j7NVyvhxbuRLH+c5q34ZXTsjONmEf6rF1qjNg==}
+  gateio-api@file:vendors/gateio-api:
+    resolution: {directory: vendors/gateio-api, type: directory}
 
   gensync@1.0.0-beta.2:
     resolution: {integrity: sha512-3hN7NaskYvMDLQY55gnW3NQ+mesEAepTqlg+VEbj7zzqEMBVNhzcGYYeqFo/TlYz6eQiFcp1HcsCZO+nGgS8zg==}
@@ -3645,7 +3645,7 @@ snapshots:
 
   function-bind@1.1.2: {}
 
-  gateio-api@1.5.0:
+  gateio-api@file:vendors/gateio-api:
     dependencies:
       axios: 1.14.0
       isomorphic-ws: 4.0.1(ws@8.20.0)

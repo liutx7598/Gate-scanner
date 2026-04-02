@@ -15,7 +15,7 @@
     "@gate-screener/shared-types": "workspace:*",
     "@gate-screener/shared-utils": "workspace:*",
     "fastify": "^5.6.1",
-    "gateio-api": "^1.5.0",
+    "gateio-api": "file:../../vendors/gateio-api",
     "lru-cache": "^11.2.2",
     "p-limit": "^7.1.1",
     "zod": "^4.1.12"

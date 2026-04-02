@@ -8,6 +8,9 @@ coverage
 apps/api/data
 *.tsbuildinfo
 .logs
+_references/
+!vendors/gateio-api/dist/
+!vendors/gateio-api/dist/**
 apps/web/src/**/*.js
 apps/web/src/**/*.js.map
 apps/web/src/**/*.d.ts

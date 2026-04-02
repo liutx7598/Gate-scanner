@@ -1,0 +1,29 @@
+export type GateBaseUrlKey = 'live' | 'futuresLiveAlternative' | 'futuresTestnet';
+export interface FromToPageLimit {
+    from: number;
+    to: number;
+    page: number;
+    limit: number;
+}
+export interface CurrencyPair {
+    id?: string;
+    base?: string;
+    base_name?: string;
+    quote?: string;
+    quote_name?: string;
+    fee?: string;
+    min_base_amount?: string;
+    min_quote_amount?: string;
+    max_base_amount?: string;
+    max_quote_amount?: string;
+    amount_precision?: number;
+    precision?: number;
+    trade_status?: 'untradable' | 'buyable' | 'sellable' | 'tradable';
+    sell_start?: number;
+    buy_start?: number;
+    type: string;
+    delisting_time?: number;
+    trade_url?: string;
+    up_rate?: string;
+    down_rate?: string;
+}
