@@ -1,0 +1,37 @@
+{
+  "name": "低位反转针形",
+  "request": {
+    "settle": "usdt",
+    "timeframe": "15m",
+    "minVolume": 300000,
+    "minTurnover": 1000000,
+    "limit": 20,
+    "sortBy": "volume",
+    "sortDirection": "desc",
+    "maRules": [
+      {
+        "id": "ma-10",
+        "period": 10,
+        "direction": "DOWN",
+        "slopeRange": "0_45",
+        "klineRelation": "CROSS_UP"
+      }
+    ],
+    "maPairRules": [
+      {
+        "maA": 5,
+        "maB": 10,
+        "relation": "CONVERGE"
+      }
+    ],
+    "changeRules": [
+      {
+        "timeframe": "1h",
+        "operator": "BETWEEN",
+        "min": -5,
+        "max": 1.5
+      }
+    ],
+    "patterns": ["LONG_LOWER_SHADOW", "DOUBLE_PIN_BOTTOM", "W_BOTTOM"]
+  }
+}

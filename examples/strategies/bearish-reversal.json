@@ -1,0 +1,43 @@
+{
+  "name": "空头反转筛选",
+  "request": {
+    "settle": "usdt",
+    "timeframe": "4h",
+    "minVolume": 800000,
+    "minTurnover": 8000000,
+    "limit": 30,
+    "sortBy": "change",
+    "sortDirection": "asc",
+    "maRules": [
+      {
+        "id": "ma-5",
+        "period": 5,
+        "direction": "DOWN",
+        "slopeRange": "45_90",
+        "klineRelation": "BELOW_MA"
+      },
+      {
+        "id": "ma-20",
+        "period": 20,
+        "direction": "DOWN",
+        "slopeRange": "ANY",
+        "klineRelation": "ANY"
+      }
+    ],
+    "maPairRules": [
+      {
+        "maA": 5,
+        "maB": 20,
+        "relation": "CROSS_DOWN"
+      }
+    ],
+    "changeRules": [
+      {
+        "timeframe": "today",
+        "operator": "LT",
+        "value": -2
+      }
+    ],
+    "patterns": ["LONG_UPPER_SHADOW", "BEARISH_ENGULFING", "GUILLOTINE", "THREE_INCENSE"]
+  }
+}

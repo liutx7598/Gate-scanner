@@ -1,0 +1,18 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "declaration": false,
+    "jsx": "react-jsx",
+    "noEmit": true,
+    "paths": {
+      "@/*": ["src/*"],
+      "@gate-screener/shared-types": ["../../packages/shared-types/src/index.ts"],
+      "@gate-screener/shared-utils": ["../../packages/shared-utils/src/index.ts"]
+    },
+    "types": ["vite/client", "vitest/globals"],
+    "tsBuildInfoFile": "dist/.tsbuildinfo"
+  },
+  "include": ["src", "vite.config.ts"],
+  "exclude": ["src/**/*.test.ts", "src/**/*.test.tsx"]
+}

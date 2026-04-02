@@ -1,0 +1,43 @@
+{
+  "name": "趋势突破扫描",
+  "request": {
+    "settle": "usdt",
+    "timeframe": "1h",
+    "minVolume": 500000,
+    "minTurnover": 5000000,
+    "limit": 50,
+    "sortBy": "change",
+    "sortDirection": "desc",
+    "maRules": [
+      {
+        "id": "ma-5",
+        "period": 5,
+        "direction": "UP",
+        "slopeRange": "45_90",
+        "klineRelation": "ABOVE_MA"
+      },
+      {
+        "id": "ma-20",
+        "period": 20,
+        "direction": "UP",
+        "slopeRange": "ANY",
+        "klineRelation": "ANY"
+      }
+    ],
+    "maPairRules": [
+      {
+        "maA": 5,
+        "maB": 20,
+        "relation": "CROSS_UP"
+      }
+    ],
+    "changeRules": [
+      {
+        "timeframe": "4h",
+        "operator": "GT",
+        "value": 3
+      }
+    ],
+    "patterns": ["FLAG_BREAKOUT", "LOTUS_FROM_WATER"]
+  }
+}
