@@ -8,11 +8,31 @@ interface MarketBasicFiltersProps {
 
 export function MarketBasicFilters({ request, onChange }: MarketBasicFiltersProps) {
   return (
-    <section className="card filter-section">
+    <section className="card filter-section filter-section--compact">
       <div className="section-heading">
-        <h2>基础市场筛选</h2>
+        <div>
+          <h2>基础条件</h2>
+          <p className="section-copy">先选 K 线周期，再补充成交量、成交额、排序方式和返回数量。</p>
+        </div>
       </div>
-      <div className="compact-grid compact-grid--6">
+
+      <div className="inline-selector">
+        <div className="inline-selector__label">K 线周期</div>
+        <div className="segment-group">
+          {TIMEFRAME_LABELS.map((option) => (
+            <button
+              key={option}
+              className={`segment-button ${request.timeframe === option ? 'active' : ''}`}
+              type="button"
+              onClick={() => onChange({ ...request, timeframe: option })}
+            >
+              {option}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="compact-grid compact-grid--5">
         <label className="field">
           <span>交易市场</span>
           <select value={request.settle} onChange={() => onChange({ ...request, settle: 'usdt' })}>
@@ -23,25 +43,13 @@ export function MarketBasicFilters({ request, onChange }: MarketBasicFiltersProp
             ))}
           </select>
         </label>
-        <label className="field">
-          <span>K 线周期</span>
-          <select
-            value={request.timeframe}
-            onChange={(event) => onChange({ ...request, timeframe: event.target.value as ScanRequest['timeframe'] })}
-          >
-            {TIMEFRAME_LABELS.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
-        </label>
+
         <label className="field">
           <span>最小成交额</span>
           <input
             type="number"
             min="0"
-            placeholder="例如 1000000"
+            placeholder="例如 5000000"
             value={request.minTurnover ?? ''}
             onChange={(event) =>
               onChange({
@@ -51,6 +59,7 @@ export function MarketBasicFilters({ request, onChange }: MarketBasicFiltersProp
             }
           />
         </label>
+
         <label className="field">
           <span>最小成交量</span>
           <input
@@ -66,6 +75,7 @@ export function MarketBasicFilters({ request, onChange }: MarketBasicFiltersProp
             }
           />
         </label>
+
         <label className="field">
           <span>排序方式</span>
           <select
@@ -79,6 +89,7 @@ export function MarketBasicFilters({ request, onChange }: MarketBasicFiltersProp
             ))}
           </select>
         </label>
+
         <label className="field">
           <span>返回数量</span>
           <select

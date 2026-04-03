@@ -12,7 +12,7 @@ describe('PatternFilterPanel', () => {
 
     render(<PatternFilterPanel request={request} onChange={onChange} />);
 
-    await user.click(screen.getByLabelText('W底'));
+    await user.click(screen.getByRole('checkbox', { name: 'W_BOTTOM' }));
 
     expect(onChange).toHaveBeenCalledTimes(1);
     expect(onChange.mock.calls[0][0].patterns).toEqual(['W_BOTTOM']);

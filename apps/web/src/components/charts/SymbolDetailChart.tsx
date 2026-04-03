@@ -9,7 +9,12 @@ interface SymbolDetailChartProps {
 
 const buildOption = (result: ScanResult): EChartsOption => {
   const xAxisData = result.candles.map((candle) =>
-    new Date(candle.timestamp).toLocaleString('zh-CN', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })
+    new Date(candle.timestamp).toLocaleString('zh-CN', {
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit'
+    })
   );
 
   const klineData = result.candles.map((candle) => [candle.open, candle.close, candle.low, candle.high]);
@@ -83,7 +88,7 @@ const buildOption = (result: ScanResult): EChartsOption => {
           width: 1.5
         },
         data: (result.maSeries[key] ?? []).map((value) => (Number.isFinite(value) ? value : null)),
-        color: ['#2563eb', '#f59e0b', '#8b5cf6', '#0f766e', '#dc2626', '#64748b'][index]
+        color: ['#2559c7', '#f08a24', '#8b5cf6', '#0f766e', '#dc2626', '#64748b'][index]
       }))
     ]
   };
@@ -94,7 +99,7 @@ export function SymbolDetailChart({ result }: SymbolDetailChartProps) {
     return (
       <div className="detail-empty">
         <h3>图表详情</h3>
-        <p>点击左侧任一标的，查看 K 线、均线和命中说明。</p>
+        <p>点击左侧任一标的，即可查看 K 线、均线和命中说明。</p>
       </div>
     );
   }
@@ -110,6 +115,7 @@ export function SymbolDetailChart({ result }: SymbolDetailChartProps) {
             <span>波动率 {result.volatility.toFixed(2)}%</span>
           </div>
         </div>
+
         <div className="detail-hits">
           {result.hits.map((hit, index) => (
             <span key={`${hit}-${index}`} className="tag-pill subtle">
@@ -118,6 +124,7 @@ export function SymbolDetailChart({ result }: SymbolDetailChartProps) {
           ))}
         </div>
       </div>
+
       <ReactECharts option={buildOption(result)} style={{ height: 420 }} />
     </div>
   );

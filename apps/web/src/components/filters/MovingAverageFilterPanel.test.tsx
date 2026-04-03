@@ -12,7 +12,7 @@ describe('MovingAverageFilterPanel', () => {
 
     render(<MovingAverageFilterPanel request={request} onChange={onChange} />);
 
-    await user.click(screen.getByRole('button', { name: '+ 添加均线' }));
+    await user.click(screen.getByLabelText('add-ma-rule'));
 
     expect(onChange).toHaveBeenCalledTimes(1);
     const nextRequest = onChange.mock.calls[0][0];

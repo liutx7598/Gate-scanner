@@ -2,6 +2,13 @@ export type SlopeRange = 'ANY' | '0_45' | '45_90';
 export type Direction = 'ANY' | 'UP' | 'DOWN';
 export type KLineRelation = 'ANY' | 'CROSS_UP' | 'CROSS_DOWN' | 'ABOVE_MA' | 'BELOW_MA';
 export type MaPairRelation = 'ANY' | 'CROSS_UP' | 'CROSS_DOWN' | 'OPPOSITE' | 'CONVERGE';
+export type IndicatorCross = 'ANY' | 'GOLDEN_CROSS' | 'DEAD_CROSS';
+export type MacdSignal = IndicatorCross;
+export type MacdLine = 'DIF' | 'DEA' | 'HISTOGRAM';
+export type KdjLine = 'K' | 'D' | 'J';
+export type BollPosition = 'ANY' | 'ABOVE_MID' | 'BELOW_MID' | 'BREAK_UPPER' | 'BREAK_LOWER';
+export type VolumeRatioBaseline = 'MA5' | 'MA20';
+
 export type PatternType =
   | 'LONG_UPPER_SHADOW'
   | 'LONG_LOWER_SHADOW'
@@ -53,6 +60,44 @@ export interface ChangeRule {
   max?: number;
 }
 
+export interface NumericRangeRule {
+  enabled: boolean;
+  min?: number;
+  max?: number;
+}
+
+export interface MaConvergenceRule {
+  enabled: boolean;
+  periods: number[];
+  thresholdPct: number;
+}
+
+export interface RsiRule extends NumericRangeRule {
+  period: 6 | 14 | 24;
+}
+
+export interface MacdRule extends NumericRangeRule {
+  line: MacdLine;
+  cross: IndicatorCross;
+}
+
+export interface KdjRule extends NumericRangeRule {
+  line: KdjLine;
+  cross: IndicatorCross;
+}
+
+export interface BollRule extends NumericRangeRule {
+  position: BollPosition;
+}
+
+export interface BiasRule extends NumericRangeRule {
+  period: 5 | 10 | 20;
+}
+
+export interface VolumeRatioRule extends NumericRangeRule {
+  baseline: VolumeRatioBaseline;
+}
+
 export interface ScanRequest {
   settle: 'usdt';
   timeframe: ScanTimeframe;
@@ -63,6 +108,15 @@ export interface ScanRequest {
   sortDirection?: 'asc' | 'desc';
   maRules: MaRule[];
   maPairRules: MaPairRule[];
+  maConvergence: MaConvergenceRule;
+  entityCrossAboveMa5: boolean;
+  macdSignal: MacdSignal;
+  rsiRule: RsiRule;
+  macdRule: MacdRule;
+  kdjRule: KdjRule;
+  bollRule: BollRule;
+  biasRule: BiasRule;
+  volumeRatioRule: VolumeRatioRule;
   changeRules: ChangeRule[];
   patterns: PatternType[];
 }
@@ -143,7 +197,7 @@ export const PATTERN_LABELS: Record<PatternType, string> = {
   LONG_LOWER_SHADOW: '长下影线',
   BULLISH_ENGULFING: '阳线反包',
   BEARISH_ENGULFING: '阴线反包',
-  W_BOTTOM: 'W底',
+  W_BOTTOM: 'W 底',
   LOTUS_FROM_WATER: '出水芙蓉',
   GUILLOTINE: '断头铡',
   ROUND_BOTTOM: '圆弧底',

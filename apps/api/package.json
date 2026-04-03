@@ -2,10 +2,11 @@
   "name": "@gate-screener/api",
   "version": "0.1.0",
   "type": "module",
-  "main": "./dist/server.js",
-  "types": "./dist/server.d.ts",
+  "main": "./dist/apps/api/src/server.js",
+  "types": "./dist/apps/api/src/server.d.ts",
   "scripts": {
     "dev": "tsx watch src/server.ts",
+    "start": "node dist/apps/api/src/server.js",
     "build": "tsc -p tsconfig.json",
     "test": "vitest run",
     "lint": "eslint src test --ext .ts"

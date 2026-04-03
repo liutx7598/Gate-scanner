@@ -13,7 +13,17 @@ export const getRequiredCandleLimit = (request: ScanRequest): number => {
   const maxMaPeriod = Math.max(
     20,
     ...request.maRules.map((rule) => rule.period),
-    ...request.maPairRules.flatMap((rule) => [rule.maA, rule.maB])
+    ...request.maPairRules.flatMap((rule) => [rule.maA, rule.maB]),
+    ...(request.maConvergence.enabled ? request.maConvergence.periods : [])
+  );
+  const indicatorRequirement = Math.max(
+    request.macdSignal === 'ANY' && !request.macdRule.enabled ? 0 : 35,
+    request.rsiRule.enabled ? request.rsiRule.period + 2 : 0,
+    request.kdjRule.enabled ? 12 : 0,
+    request.bollRule.enabled ? 24 : 0,
+    request.biasRule.enabled ? request.biasRule.period + 2 : 0,
+    request.volumeRatioRule.enabled ? (request.volumeRatioRule.baseline === 'MA20' ? 24 : 10) : 0,
+    request.entityCrossAboveMa5 ? 8 : 0
   );
 
   const patternRequirement = request.patterns.some((pattern) => EXTENDED_PATTERN_SET.has(pattern))
@@ -24,8 +34,13 @@ export const getRequiredCandleLimit = (request: ScanRequest): number => {
     0,
     ...request.changeRules.map((rule) => getChangeRuleLookback(rule, request.timeframe))
   );
-
-  return Math.max(DEFAULT_CANDLE_LIMIT, maxMaPeriod + 5, patternRequirement, changeRequirement + 5);
+  return Math.max(
+    DEFAULT_CANDLE_LIMIT,
+    maxMaPeriod + 5,
+    indicatorRequirement,
+    patternRequirement,
+    changeRequirement + 5
+  );
 };
 
 const getChangeRuleLookback = (rule: ChangeRule, candleTimeframe: ScanTimeframe): number => {

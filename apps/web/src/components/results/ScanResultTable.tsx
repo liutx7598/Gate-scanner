@@ -2,17 +2,28 @@ import { PATTERN_LABELS, type ScanResult } from '@gate-screener/shared-types';
 import { formatCompactNumber, formatPercent } from '@gate-screener/shared-utils';
 
 interface ScanResultTableProps {
+  scanning: boolean;
+  hasScanned: boolean;
   results: ScanResult[];
   selectedContract?: string;
   onSelect: (result: ScanResult) => void;
 }
 
-export function ScanResultTable({ results, selectedContract, onSelect }: ScanResultTableProps) {
+export function ScanResultTable(props: ScanResultTableProps) {
+  const { scanning, hasScanned, results, selectedContract, onSelect } = props;
+
   if (results.length === 0) {
+    const title = scanning ? '正在扫描...' : hasScanned ? '本次无命中结果' : '暂无扫描结果';
+    const description = scanning
+      ? '系统正在拉取市场数据并计算条件，请稍等几秒。'
+      : hasScanned
+        ? '这次条件比较严格，可以放宽均线、成交量或形态条件后重试。'
+        : '设置筛选条件后点击“开始扫描”，结果会显示在这里。';
+
     return (
       <div className="results-empty">
-        <h3>暂无扫描结果</h3>
-        <p>设置筛选条件后点击“开始扫描”，结果会在这里展示。</p>
+        <h3>{title}</h3>
+        <p>{description}</p>
       </div>
     );
   }

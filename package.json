@@ -6,6 +6,11 @@
   "packageManager": "pnpm@10.17.1",
   "scripts": {
     "dev": "pnpm -r --parallel --filter @gate-screener/api --filter @gate-screener/web dev",
+    "start": "pnpm -r --parallel --filter @gate-screener/api --filter @gate-screener/web start",
+    "desktop:prepare": "pnpm build",
+    "desktop:start": "powershell -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\start-desktop.ps1",
+    "desktop:oneclick": "pnpm desktop:start",
+    "portable:build": "powershell -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\build-portable-package.ps1",
     "dev:web": "pnpm --filter @gate-screener/web dev",
     "dev:api": "pnpm --filter @gate-screener/api dev",
     "vendor:build:gateio-api": "node ./scripts/build-vendored-gateio-api.mjs",
